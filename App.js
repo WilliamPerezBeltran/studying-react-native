@@ -1,47 +1,19 @@
-import * as React from 'react';
-import { Button, View, Text } from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-
-class HomeScreen extends React.Component {
+import React, { Component } from "react";
+import { Container, Header, Content, Accordion } from "native-base";
+const dataArray = [
+  { title: "First Element", content: "Lorem ipsum dolor sit amet" },
+  { title: "Second Element", content: "Lorem ipsum dolor sit amet" },
+  { title: "Third Element", content: "Lorem ipsum dolor sit amet" }
+];
+export default class AccordionExample extends Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-      </View>
+      <Container>
+        <Header />
+        <Content padder>
+          <Accordion dataArray={dataArray} expanded={0}/>
+        </Content>
+      </Container>
     );
   }
 }
-
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.push('Details')}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
-  }
-}
-
-const RootStack = createStackNavigator({
-  Home: HomeScreen,
-  Details: DetailsScreen,
-});
-
-export default createAppContainer(RootStack);
